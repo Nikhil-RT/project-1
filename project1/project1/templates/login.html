@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <header>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <head>
+            <title>Login Page</title>
+            <style>
+                #titles{    
+                  text-align: center;
+                  color: white;
+                  font-size: 30px;
+                  font-family: sans-serif;
+                  background-color: black;
+                  padding: 20px;
+                  border-radius: 50px;
+                  margin-left: 30%;
+                  margin-right: 30%;
+                  margin-bottom: 5%;
+              }
+              ul{
+                  background-color: yellowgreen;
+                  /* background-color: rgb(190, 126, 126); */
+              }
+              header{
+                  margin-left: 10%;
+                  margin-right: 10%;
+              }
+              html{
+                  background-color: rgb(190, 126, 126);
+              }
+              .btn-secondary{
+                  margin-left: 45%;
+              }
+              .input-group{
+                  margin-left:40%;
+              }
+              .form-control{
+                  margin-right: 60%;
+              }
+              .input-group-text{
+                  font-family: sans-serif;
+                  color: black;
+              }
+              
+              @media(max-width: 1000px){
+              
+                  .form-control{
+                      margin-right: 20%;
+                      margin-left : 5%
+                  }
+              }
+              </style>
+        </head>
+            {% if name %}
+                <h2>Hello {{ name }}, Please Login to continue</h2>
+            {% endif %}
+        <body>
+            <br>
+            <h1 id=titles style="opacity: initial; text-align: center;"><u>Login Page</u></h1>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1" >Email ID</span>
+                </div>
+                <input type="mail" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <br>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Password</span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+              </div>
+              <br>
+            <button type="button" class="btn btn-secondary btn-lg">Login</button>
+            <br>
+        </body>
+    </header>
+    <br><br>
+    <marquee><h2 style="padding-left: 6mm;">Please follow the guidelines for a stronger password.</h2></marquee>
+    <br><br>
+    <ul>
+        <li>Do not write down your passwords.</li>
+        <li>Keep your passwords private – never share a password with anyone else.</li>
+        <li>Use passwords of at least eight (8) characters or more (longer is better)</li>
+        <li>Use a combination of upper case letters, lower case letters, numbers, and special characters (for example: !, @, &, %, +).</li>
+        <li>A strong password should look like a series of random characters.</li>
+    </ul>
+</html>
