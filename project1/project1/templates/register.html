@@ -20,7 +20,7 @@
             background-color: rgb(190, 126, 126);
         }
         .btn-secondary{
-            margin-left: 45%;
+            margin-left: 29%;
         }
         .input-group{
             margin-left:30%;
@@ -48,7 +48,7 @@
             <title>Registration Page</title>
         </head>
         {% if name %}
-              <h2>Hello {{name}}, please login </h2>
+              <h2>Hello {{ name }}, please login </h2>
             {% endif %}
         <body>
           <h1 id=titles><u>Registration Page</u></h1>
@@ -70,6 +70,7 @@
             </div>
             <br>
           <button type="submit" class="btn btn-secondary btn-lg">submit</button>
+          <button type="submit" class="btn btn-secondary btn-lg" formaction="/auth">Login</button>
         </form>
         </body>
     </header>

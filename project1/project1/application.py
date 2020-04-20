@@ -1,30 +1,36 @@
 import os
-from flask import Flask, session,render_template,request,flash,redirect,url_for,logging
+from flask import Flask, session,request,render_template,flash,logging,redirect,url_for
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime as dt
 from create import User,db
 
+
 app = Flask(__name__)
 
-
-# Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
-# Configure session to use filesystem
-# app.config["SESSION_PERMANENT"] = False
-# app.config["SESSION_TYPE"] = "filesystem"
-# Session(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key="email"
 db.init_app(app)
+
+def main():
+    db.create_all()
+
+# Check for environment variable
+
+
+# Configure session to use filesystem
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # Set up database
 # engine = create_engine(os.getenv("DATABASE_URL"))
 # db = scoped_session(sessionmaker(bind=engine))
-def main():
-    db.create_all()
+
 
 @app.route("/")
 def index():
@@ -55,15 +61,48 @@ def register():
 def login():
     return render_template("login.html")
 
-
 @app.route("/admin")
 def admin():
     users=User.query.all()
 
     return render_template ("admin.html",data=users)
 
-# if __name__ == "__main__":
-#     print ("main not called")
-with app.app_context():
-    print ("main called")
-    main()
+@app.route("/auth", methods=["GET","POST"])
+def auth():
+    if request.method=="POST":
+
+        # i will get my email entered in the webpage
+        mail = request.form.get("name") 
+        key = request.form.get("pwd")
+        u = User.query.get(mail)
+
+        #select * from user where email==mailID  ===> email,password,timestamp
+        if u != None:
+
+            if key == u.password :
+            #     print ("your mail id is found")
+                session["email"]=mail
+                return render_template("account.html")
+            else:
+                return "<marquee><h1>Invalid Password</h1></marquee>"
+        else:
+            return "<marquee><h1>ID or Password doesn't match</h1></marquee>"
+
+@app.route("/search",methods=["GET"])
+def search():
+    if session["email"] == None:
+        return redirect(url_for("/logout"))
+    else:
+        return "Maintained successfully"
+
+@app.route("/logout",methods=["GET","POST"])
+def logout():
+    session["email"]=None
+    return redirect("/register")
+
+
+if __name__ == "__main__":
+    with app.app_context():
+        print ("main called")
+        main()
+

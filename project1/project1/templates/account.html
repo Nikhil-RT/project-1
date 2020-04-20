@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<style>
+    .btn-secondary{
+            margin-left: 46%;
+        }
+</style>
+<html>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+</head>
+<body>
+    <h2 style="text-align: center;">You have logged Successfully</h2>
+    <br><br>
+    <form action="{{url_for('logout')}}">
+        <button type="submit" class="btn btn-secondary btn-lg">Logout</button>
+    </form>
+
+</body>
+</html>
